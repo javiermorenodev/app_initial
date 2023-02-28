@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (_) => const HomeScreen(),
         NewUserScreen.routeName: (_) => const NewUserScreen(),
         DetailUserScreen.routeName: (_) => const DetailUserScreen(),
+        NewPostScreen.routeName: (_) => const NewPostScreen(),
       },
     );
   }

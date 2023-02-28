@@ -1,5 +1,6 @@
 import 'package:first/presentation/screens/detail_user/widgets/info.dart';
 import 'package:first/presentation/screens/detail_user/widgets/list_post.dart';
+import 'package:first/presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 class DetailUserScreen extends StatelessWidget {
@@ -62,9 +63,9 @@ class DetailUserScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, NewPostScreen.routeName),
         backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.note_add_rounded),
       ),
     );
   }

@@ -55,20 +55,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
               ],
             ),
             const Spacer(),
-            Container(
-              width: 100.0,
-              padding: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: Center(
-                child: Text(
-                  'Guardar',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            )
+            const ButtomWidget()
           ],
         ),
       ),
