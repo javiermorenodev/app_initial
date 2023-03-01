@@ -1,3 +1,4 @@
+import 'package:first/presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 class ListPostWidget extends StatelessWidget {
@@ -21,10 +22,11 @@ class ListPostWidget extends StatelessWidget {
             height: 250.0,
             child: ListView.separated(
               itemBuilder: (context, index) {
-                return const ListTile(
-                  leading: Icon(Icons.file_copy),
-                  title: Text('Nombre de post'),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                return  ListTile(
+                  leading:const Icon(Icons.file_copy),
+                  title:const Text('Nombre de post'),
+                  trailing:const Icon(Icons.arrow_forward_ios_rounded),
+                  onTap: () => Navigator.pushNamed(context, DetailPostScreen.routeName),
                 );
               },
               separatorBuilder: (context, index) => const Divider(),
