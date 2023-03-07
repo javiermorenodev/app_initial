@@ -22,11 +22,12 @@ class ListPostWidget extends StatelessWidget {
             height: 250.0,
             child: ListView.separated(
               itemBuilder: (context, index) {
-                return  ListTile(
-                  leading:const Icon(Icons.file_copy),
-                  title:const Text('Nombre de post'),
-                  trailing:const Icon(Icons.arrow_forward_ios_rounded),
-                  onTap: () => Navigator.pushNamed(context, DetailPostScreen.routeName),
+                return ListTile(
+                  leading: const Icon(Icons.file_copy),
+                  title: const Text('Nombre de post'),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                  onTap: () =>
+                      Navigator.pushNamed(context, DetailPostScreen.routeName),
                 );
               },
               separatorBuilder: (context, index) => const Divider(),

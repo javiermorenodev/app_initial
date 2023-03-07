@@ -13,12 +13,13 @@ class DetailPostScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            _item('Titulo', 'Titulo de post'),
-            const SizedBox(height: 20.0),
-            _item('Contenido', 'Contenido de post dnaskljbnrd eab earlbaerlba skdjbfsd skdn'),
+            _item('Título', 'Título del post'),
+            const SizedBox(height: 10.0),
+            _item('Contenido',
+                'Contenido del post safuafvasbf asvf asufvas kf asiuvf aks fai'),
           ],
         ),
       ),
@@ -42,7 +43,7 @@ class DetailPostScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Text(text),
           ),
-        ),
+        )
       ],
     );
   }
