@@ -1,4 +1,6 @@
 import 'package:first/presentation/screens/screens.dart';
+import 'package:first/presentation/widgets/widgets.dart';
+import 'package:first/services/http.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final HttpService httpService = HttpService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,18 +22,26 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Lista de usuarios'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: ListView.separated(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: const Text('Nombre'),
-            subtitle: const Text('correo@correo.com'),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () =>
-                Navigator.pushNamed(context, DetailUserScreen.routeName),
-          );
+      body: FutureBuilder(
+        future: httpService.getAllUsers(),
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? ListView.separated(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final user = snapshot.data![index];
+                    return ListTile(
+                      title: Text(user.name!),
+                      subtitle: Text(user.email!),
+                      trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                      onTap: () => Navigator.pushNamed(
+                          context, DetailUserScreen.routeName),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                )
+              : const LoadingWidget();
         },
-        separatorBuilder: (context, index) => const Divider(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
