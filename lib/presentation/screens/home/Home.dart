@@ -45,7 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, NewUserScreen.routeName);
+          Navigator.pushNamed(context, NewUserScreen.routeName).then((value) {
+            if (value == true) {
+              setState(() {});
+            }
+          });
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.person_add),

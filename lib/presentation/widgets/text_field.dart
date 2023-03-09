@@ -5,6 +5,7 @@ class TextFieldWidget extends StatelessWidget {
   final String placeholder;
   final IconData? icon;
   final bool isTextArea;
+  final TextEditingController? controller;
 
   const TextFieldWidget({
     Key? key,
@@ -12,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
     required this.placeholder,
     this.icon,
     this.isTextArea = false,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class TextFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: TextField(
+            controller: controller,
             maxLines: isTextArea ? 6 : null,
             decoration: InputDecoration(
               border: InputBorder.none,
