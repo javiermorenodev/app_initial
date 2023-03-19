@@ -1,8 +1,19 @@
 import 'package:first/presentation/screens/screens.dart';
+import 'package:first/presentation/widgets/widgets.dart';
+import 'package:first/services/http.dart';
 import 'package:flutter/material.dart';
 
-class ListPostWidget extends StatelessWidget {
-  const ListPostWidget({super.key});
+class ListPostWidget extends StatefulWidget {
+  final int userId;
+
+  const ListPostWidget({super.key, required this.userId});
+
+  @override
+  State<ListPostWidget> createState() => _ListPostWidgetState();
+}
+
+class _ListPostWidgetState extends State<ListPostWidget> {
+  HttpService httpService = HttpService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +31,30 @@ class ListPostWidget extends StatelessWidget {
           elevation: 20,
           child: SizedBox(
             height: 250.0,
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const Icon(Icons.file_copy),
-                  title: const Text('Nombre de post'),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                  onTap: () =>
-                      Navigator.pushNamed(context, DetailPostScreen.routeName),
-                );
+            child: FutureBuilder(
+              future: httpService.getAllPostByUser(widget.userId),
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? snapshot.data!.isEmpty
+                        ? const Center(child: Text('No posee posts'))
+                        : ListView.separated(
+                            itemBuilder: (context, index) {
+                              final post = snapshot.data![index];
+                              return ListTile(
+                                leading: const Icon(Icons.file_copy),
+                                title: Text(post.title!),
+                                trailing:
+                                    const Icon(Icons.arrow_forward_ios_rounded),
+                                onTap: () => Navigator.pushNamed(
+                                    context, DetailPostScreen.routeName),
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
+                            itemCount: snapshot.data!.length,
+                          )
+                    : const LoadingWidget();
               },
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: 2,
             ),
           ),
         )

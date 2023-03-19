@@ -35,7 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       subtitle: Text(user.email!),
                       trailing: const Icon(Icons.arrow_forward_ios_rounded),
                       onTap: () => Navigator.pushNamed(
-                          context, DetailUserScreen.routeName),
+                        context,
+                        DetailUserScreen.routeName,
+                        arguments: user,
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) => const Divider(),

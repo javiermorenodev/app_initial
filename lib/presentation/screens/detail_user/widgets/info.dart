@@ -1,7 +1,10 @@
+import 'package:first/models/users.dart';
 import 'package:flutter/material.dart';
 
 class InfoWidget extends StatelessWidget {
-  const InfoWidget({super.key});
+  final UserModel userModel;
+
+  const InfoWidget({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +22,12 @@ class InfoWidget extends StatelessWidget {
           elevation: 20,
           child: Column(
             children: [
-              _item('Nombre', Icons.person),
-              _item('correo@correo.com', Icons.email),
-              _item('Masculino', Icons.supervised_user_circle_rounded),
-              _item('Activo', Icons.circle),
+              _item(userModel.name!, Icons.person),
+              _item(userModel.email!, Icons.email),
+              _item(userModel.gender == 'female' ? 'Femenino' : 'Masculino',
+                  Icons.supervised_user_circle_rounded),
+              _item(userModel.status == 'inactive' ? 'Inactivo' : 'Activo',
+                  Icons.circle),
             ],
           ),
         ),

@@ -37,4 +37,15 @@ class HttpService {
       return false;
     }
   }
+
+  Future<List<PostModel>> getAllPostByUser(int userId) async {
+    final resp = await http.get(
+      Uri.parse('$_url/users/$userId/posts'),
+      headers: {'Authorization': 'Bearer $_token'},
+    );
+
+    return (jsonDecode(resp.body) as List)
+        .map((user) => PostModel.fromJson(user))
+        .toList();
+  }
 }
