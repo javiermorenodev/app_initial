@@ -83,7 +83,15 @@ class _DetailUserScreenState extends State<DetailUserScreen> {
             : const SizedBox.shrink(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, NewPostScreen.routeName),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          NewPostScreen.routeName,
+          arguments: userModel!.id,
+        ).then((value) {
+          if (value == true) {
+            setState(() {});
+          }
+        }),
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.note_add_rounded),
       ),

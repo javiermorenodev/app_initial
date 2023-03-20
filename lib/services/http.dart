@@ -48,4 +48,18 @@ class HttpService {
         .map((user) => PostModel.fromJson(user))
         .toList();
   }
+
+  Future<bool> postPost(PostModel postModel) async {
+    try {
+      await http.post(
+        Uri.parse('$_url/users/${postModel.userId}/posts'),
+        body: postModel.toJson(),
+        headers: {'Authorization': 'Bearer $_token'},
+      );
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

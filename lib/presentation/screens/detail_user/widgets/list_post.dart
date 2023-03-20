@@ -46,7 +46,10 @@ class _ListPostWidgetState extends State<ListPostWidget> {
                                 trailing:
                                     const Icon(Icons.arrow_forward_ios_rounded),
                                 onTap: () => Navigator.pushNamed(
-                                    context, DetailPostScreen.routeName),
+                                  context,
+                                  DetailPostScreen.routeName,
+                                  arguments: post,
+                                ),
                               );
                             },
                             separatorBuilder: (context, index) =>

@@ -1,3 +1,4 @@
+import 'package:first/models/post.dart';
 import 'package:flutter/material.dart';
 
 class DetailPostScreen extends StatelessWidget {
@@ -7,6 +8,7 @@ class DetailPostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final post = ModalRoute.of(context)!.settings.arguments as PostModel;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detalle de post'),
@@ -16,10 +18,9 @@ class DetailPostScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            _item('Título', 'Título del post'),
+            _item('Título', post.title!),
             const SizedBox(height: 10.0),
-            _item('Contenido',
-                'Contenido del post safuafvasbf asvf asufvas kf asiuvf aks fai'),
+            _item('Contenido', post.body!),
           ],
         ),
       ),
