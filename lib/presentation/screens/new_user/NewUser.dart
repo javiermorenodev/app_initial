@@ -52,7 +52,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
       status: _selectStatus!.value,
     );
 
-    httpService.postUset(user).then((value) {
+    httpService.postUser(user).then((value) {
       if (value == true) {
         Navigator.pop(context, true);
       }

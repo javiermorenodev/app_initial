@@ -2,6 +2,8 @@ import 'package:first/models/users.dart';
 import 'package:first/presentation/screens/detail_user/widgets/info.dart';
 import 'package:first/presentation/screens/detail_user/widgets/list_post.dart';
 import 'package:first/presentation/screens/screens.dart';
+import 'package:first/presentation/widgets/widgets.dart';
+import 'package:first/services/http.dart';
 import 'package:flutter/material.dart';
 
 class DetailUserScreen extends StatefulWidget {
@@ -15,6 +17,9 @@ class DetailUserScreen extends StatefulWidget {
 
 class _DetailUserScreenState extends State<DetailUserScreen> {
   UserModel? userModel;
+  late bool loading = false;
+
+  HttpService httpService = HttpService();
 
   @override
   void initState() {
@@ -24,6 +29,21 @@ class _DetailUserScreenState extends State<DetailUserScreen> {
       });
     });
     super.initState();
+  }
+
+  void _delete() {
+    setState(() {
+      loading = true;
+    });
+
+    httpService.deleteUser(userModel!.id!).then((value) {
+      if (value == true) {
+        Navigator.pop(context, true);
+      }
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -43,7 +63,10 @@ class _DetailUserScreenState extends State<DetailUserScreen> {
                     content: const Text('Seguro desea eliminar el usuario?'),
                     actions: [
                       TextButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _delete();
+                        },
                         child: Text(
                           'Aceptar',
                           style:
@@ -62,10 +85,12 @@ class _DetailUserScreenState extends State<DetailUserScreen> {
                 },
               );
             },
-            icon: const Icon(
-              Icons.delete_outlined,
-              color: Colors.white,
-            ),
+            icon: loading
+                ? const LoadingWidget(secondary: true)
+                : const Icon(
+                    Icons.delete_outlined,
+                    color: Colors.white,
+                  ),
           )
         ],
       ),

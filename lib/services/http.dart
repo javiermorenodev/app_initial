@@ -24,7 +24,7 @@ class HttpService {
         .toList();
   }
 
-  Future<bool> postUset(UserModel userModel) async {
+  Future<bool> postUser(UserModel userModel) async {
     try {
       await http.post(
         Uri.parse('$_url/users'),
@@ -54,6 +54,19 @@ class HttpService {
       await http.post(
         Uri.parse('$_url/users/${postModel.userId}/posts'),
         body: postModel.toJson(),
+        headers: {'Authorization': 'Bearer $_token'},
+      );
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  Future<bool> deleteUser(int userId) async {
+    try {
+      await http.delete(
+        Uri.parse('$_url/users/$userId'),
         headers: {'Authorization': 'Bearer $_token'},
       );
 

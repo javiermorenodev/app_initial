@@ -38,7 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         DetailUserScreen.routeName,
                         arguments: user,
-                      ),
+                      ).then((value) {
+                        if (value == true) {
+                          setState(() {});
+                        }
+                      }),
                     );
                   },
                   separatorBuilder: (context, index) => const Divider(),
